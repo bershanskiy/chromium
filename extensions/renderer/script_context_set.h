@@ -109,7 +109,7 @@ class ScriptContextSet : public ScriptContextSetIterable {
       const base::RepeatingCallback<void(ScriptContext*)>& callback);
 
   // Cleans up contexts belonging to an unloaded extension.
-  void OnExtensionUnloaded(const std::string& extension_id);
+  void OnExtensionUnloaded(const ExtensionId& extension_id);
 
   void set_is_lock_screen_context(bool is_lock_screen_context) {
     is_lock_screen_context_ = is_lock_screen_context;

@@ -46,13 +46,13 @@ void AppendV8Value(v8::Isolate* isolate,
 
 }  // namespace
 
-DOMActivityLogger::DOMActivityLogger(const std::string& extension_id)
+DOMActivityLogger::DOMActivityLogger(const ExtensionId& extension_id)
     : extension_id_(extension_id) {}
 
 DOMActivityLogger::~DOMActivityLogger() = default;
 
 void DOMActivityLogger::AttachToWorld(int32_t world_id,
-                                      const std::string& extension_id) {
+                                      const ExtensionId& extension_id) {
   // If there is no logger registered for world_id, construct a new logger
   // and register it with world_id.
   if (!blink::HasDOMActivityLogger(world_id,

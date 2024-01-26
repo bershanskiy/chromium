@@ -232,7 +232,7 @@ scoped_refptr<Extension> LoadExtension(const base::FilePath& extension_path,
 }
 
 scoped_refptr<Extension> LoadExtension(const base::FilePath& extension_path,
-                                       const std::string& extension_id,
+                                       const ExtensionId& extension_id,
                                        ManifestLocation location,
                                        int flags,
                                        std::string* error) {
@@ -243,7 +243,7 @@ scoped_refptr<Extension> LoadExtension(const base::FilePath& extension_path,
 scoped_refptr<Extension> LoadExtension(
     const base::FilePath& extension_path,
     const base::FilePath::CharType* manifest_file,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     ManifestLocation location,
     int flags,
     std::string* error) {

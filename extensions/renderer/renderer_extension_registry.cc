@@ -41,7 +41,7 @@ const ExtensionSet* RendererExtensionRegistry::GetMainThreadExtensionSet()
 }
 
 bool RendererExtensionRegistry::Contains(
-    const std::string& extension_id) const {
+    const ExtensionId& extension_id) const {
   base::AutoLock lock(lock_);
   return extensions_.Contains(extension_id);
 }

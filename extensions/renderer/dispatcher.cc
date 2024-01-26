@@ -41,6 +41,7 @@
 #include "extensions/common/extension.h"
 #include "extensions/common/extension_api.h"
 #include "extensions/common/extension_features.h"
+#include "extensions/common/extension_id.h"
 #include "extensions/common/extension_messages.h"
 #include "extensions/common/extension_urls.h"
 #include "extensions/common/extensions_client.h"
@@ -341,7 +342,7 @@ Dispatcher::Dispatcher(
 
   // Initialize host permissions for any extensions that were activated before
   // WebKit was initialized.
-  for (const std::string& extension_id : active_extension_ids_) {
+  for (const ExtensionId& extension_id : active_extension_ids_) {
     const Extension* extension =
         RendererExtensionRegistry::Get()->GetByID(extension_id);
     CHECK(extension);
@@ -374,7 +375,7 @@ void Dispatcher::OnRenderFrameCreated(content::RenderFrame* render_frame) {
   RunScriptsAtDocumentStart(render_frame);
 }
 
-bool Dispatcher::IsExtensionActive(const std::string& extension_id) const {
+bool Dispatcher::IsExtensionActive(const ExtensionId& extension_id) const {
   const bool is_active = base::Contains(active_extension_ids_, extension_id);
   if (is_active)
     CHECK(RendererExtensionRegistry::Get()->Contains(extension_id));
@@ -736,7 +737,7 @@ void Dispatcher::WillDestroyServiceWorkerContextOnWorkerThread(
     g_worker_script_context_set.Get().Remove(v8_context, script_url);
   }
 
-  std::string extension_id =
+  ExtensionId extension_id =
       RendererExtensionRegistry::Get()->GetExtensionOrAppIDByURL(script_url);
   {
     base::AutoLock lock(service_workers_paused_for_on_loaded_message_lock_);
@@ -831,7 +832,7 @@ void Dispatcher::DispatchEventHelper(
 }
 
 void Dispatcher::InvokeModuleSystemMethod(content::RenderFrame* render_frame,
-                                          const std::string& extension_id,
+                                          const ExtensionId& extension_id,
                                           const std::string& module_name,
                                           const std::string& function_name,
                                           const base::Value::List& args) {
@@ -1067,7 +1068,7 @@ void Dispatcher::OnEventDispatcherRequest(
   dispatcher_.Bind(std::move(dispatcher));
 }
 
-void Dispatcher::ActivateExtension(const std::string& extension_id) {
+void Dispatcher::ActivateExtension(const ExtensionId& extension_id) {
   TRACE_RENDERER_EXTENSION_EVENT("Dispatcher::ActivateExtension", extension_id);
 
   const Extension* extension =
@@ -1171,7 +1172,7 @@ void Dispatcher::LoadExtensions(
   UpdateAllBindings(/*api_permissions_changed=*/false);
 }
 
-void Dispatcher::UnloadExtension(const std::string& extension_id) {
+void Dispatcher::UnloadExtension(const ExtensionId& extension_id) {
   TRACE_RENDERER_EXTENSION_EVENT("Dispatcher::UnloadExtension", extension_id);
 
   // See comment in OnLoaded for why it would be nice, but perhaps incorrect,
@@ -1228,7 +1229,7 @@ void Dispatcher::UnloadExtension(const std::string& extension_id) {
 }
 
 void Dispatcher::SuspendExtension(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     mojom::Renderer::SuspendExtensionCallback callback) {
   TRACE_RENDERER_EXTENSION_EVENT("Dispatcher::SuspendExtension", extension_id);
 
@@ -1242,7 +1243,7 @@ void Dispatcher::SuspendExtension(
   std::move(callback).Run();
 }
 
-void Dispatcher::CancelSuspendExtension(const std::string& extension_id) {
+void Dispatcher::CancelSuspendExtension(const ExtensionId& extension_id) {
   DispatchEventHelper(GenerateHostIdFromExtensionId(extension_id),
                       kOnSuspendCanceledEvent, base::Value::List(), nullptr);
 }
@@ -1272,7 +1273,7 @@ void Dispatcher::UpdateDefaultPolicyHostRestrictions(
       default_policy_allowed_hosts);
   // Update blink host permission allowlist exceptions for all loaded
   // extensions.
-  for (const std::string& extension_id :
+  for (const ExtensionId& extension_id :
        RendererExtensionRegistry::Get()->GetIDs()) {
     const Extension* extension =
         RendererExtensionRegistry::Get()->GetByID(extension_id);
@@ -1300,7 +1301,7 @@ void Dispatcher::UpdateUserHostRestrictions(URLPatternSet user_blocked_hosts,
   // point in updating it.
 }
 
-void Dispatcher::UpdateTabSpecificPermissions(const std::string& extension_id,
+void Dispatcher::UpdateTabSpecificPermissions(const ExtensionId& extension_id,
                                               URLPatternSet new_hosts,
                                               int tab_id,
                                               bool update_origin_allowlist) {
@@ -1452,7 +1453,7 @@ void Dispatcher::TransferBlobs(TransferBlobsCallback callback) {
   std::move(callback).Run();
 }
 
-void Dispatcher::UpdatePermissions(const std::string& extension_id,
+void Dispatcher::UpdatePermissions(const ExtensionId& extension_id,
                                    PermissionSet active_permissions,
                                    PermissionSet withheld_permissions,
                                    URLPatternSet policy_blocked_hosts,

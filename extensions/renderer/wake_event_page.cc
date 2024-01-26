@@ -93,7 +93,7 @@ class WakeEventPage::WakeEventPageNativeHandler
     v8::Global<v8::Function> callback(args.GetIsolate(),
                                       args[0].As<v8::Function>());
 
-    const std::string& extension_id = context()->GetExtensionID();
+    const ExtensionId& extension_id = context()->GetExtensionID();
     CHECK(!extension_id.empty());
 
 #if BUILDFLAG(ENABLE_EXTENSIONS_LEGACY_IPC)
@@ -207,7 +207,7 @@ WakeEventPage::WakeEventPage() = default;
 
 WakeEventPage::~WakeEventPage() = default;
 
-void WakeEventPage::MakeRequest(const std::string& extension_id,
+void WakeEventPage::MakeRequest(const ExtensionId& extension_id,
                                 OnResponseCallback on_response) {
   static base::AtomicSequenceNumber sequence_number;
   int request_id = sequence_number.GetNext();

@@ -105,7 +105,7 @@ BluetoothSocketEventDispatcher::SocketParams::SocketParams(
 BluetoothSocketEventDispatcher::SocketParams::~SocketParams() = default;
 
 void BluetoothSocketEventDispatcher::OnSocketConnect(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     int socket_id) {
   DCHECK_CURRENTLY_ON(thread_id_);
 
@@ -120,7 +120,7 @@ void BluetoothSocketEventDispatcher::OnSocketConnect(
 }
 
 void BluetoothSocketEventDispatcher::OnSocketListen(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     int socket_id) {
   DCHECK_CURRENTLY_ON(thread_id_);
 
@@ -135,7 +135,7 @@ void BluetoothSocketEventDispatcher::OnSocketListen(
 }
 
 void BluetoothSocketEventDispatcher::OnSocketResume(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     int socket_id) {
   DCHECK_CURRENTLY_ON(thread_id_);
 
@@ -354,7 +354,7 @@ void BluetoothSocketEventDispatcher::PostEvent(const SocketParams& params,
 // static
 void BluetoothSocketEventDispatcher::DispatchEvent(
     void* browser_context_id,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     std::unique_ptr<Event> event) {
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
 

@@ -69,7 +69,7 @@ void RemoveEventListenerOnIO(mojom::EventListenerPtr event_listener) {
 
 // Calls mojom::EventRouter::AddLazyListenerForServiceWorker(). It should be
 // called on the IO thread.
-void AddEventLazyListenerOnIO(const std::string& extension_id,
+void AddEventLazyListenerOnIO(const ExtensionId& extension_id,
                               const GURL& scope,
                               const std::string& event_name) {
   auto* dispatcher = WorkerThreadDispatcher::Get();
@@ -79,7 +79,7 @@ void AddEventLazyListenerOnIO(const std::string& extension_id,
 
 // Calls mojom::EventRouter::RemoveLazyListenerForServiceWorker(). It should be
 // called on the IO thread.
-void RemoveEventLazyListenerOnIO(const std::string& extension_id,
+void RemoveEventLazyListenerOnIO(const ExtensionId& extension_id,
                                  const GURL& scope,
                                  const std::string& event_name) {
   auto* dispatcher = WorkerThreadDispatcher::Get();
@@ -89,7 +89,7 @@ void RemoveEventLazyListenerOnIO(const std::string& extension_id,
 
 // Calls mojom::EventRouter::AddFilteredListenerForServiceWorker(). It should be
 // called on the IO thread.
-void AddEventFilteredListenerOnIO(const std::string& extension_id,
+void AddEventFilteredListenerOnIO(const ExtensionId& extension_id,
                                   const GURL& scope,
                                   const std::string& event_name,
                                   int64_t service_worker_version_id,
@@ -106,7 +106,7 @@ void AddEventFilteredListenerOnIO(const std::string& extension_id,
 
 // Calls mojom::EventRouter::RemoveFilteredListenerForServiceWorker(). It should
 // be called on the IO thread.
-void RemoveEventFilteredListenerOnIO(const std::string& extension_id,
+void RemoveEventFilteredListenerOnIO(const ExtensionId& extension_id,
                                      const GURL& scope,
                                      const std::string& event_name,
                                      int64_t service_worker_version_id,
@@ -272,7 +272,7 @@ void WorkerThreadDispatcher::SendAddEventListener(
 }
 
 void WorkerThreadDispatcher::SendAddEventLazyListener(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const GURL& scope,
     const std::string& event_name) {
   io_task_runner_->PostTask(
@@ -281,7 +281,7 @@ void WorkerThreadDispatcher::SendAddEventLazyListener(
 }
 
 void WorkerThreadDispatcher::SendAddEventFilteredListener(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const GURL& scope,
     const std::string& event_name,
     int64_t service_worker_version_id,
@@ -310,7 +310,7 @@ void WorkerThreadDispatcher::SendRemoveEventListener(
 }
 
 void WorkerThreadDispatcher::SendRemoveEventLazyListener(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const GURL& scope,
     const std::string& event_name) {
   io_task_runner_->PostTask(
@@ -319,7 +319,7 @@ void WorkerThreadDispatcher::SendRemoveEventLazyListener(
 }
 
 void WorkerThreadDispatcher::SendRemoveEventFilteredListener(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const GURL& scope,
     const std::string& event_name,
     int64_t service_worker_version_id,

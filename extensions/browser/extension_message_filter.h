@@ -7,6 +7,7 @@
 
 #include "base/callback_list.h"
 #include "extensions/buildflags/buildflags.h"
+#include "extensions/common/extension_id.h"
 
 #if BUILDFLAG(ENABLE_EXTENSIONS_LEGACY_IPC)
 
@@ -51,7 +52,7 @@ class ExtensionMessageFilter : public content::BrowserMessageFilter {
   // Message handlers on the UI thread.
   void OnExtensionTransferBlobsAck(const std::vector<std::string>& blob_uuids);
   void OnExtensionWakeEventPage(int request_id,
-                                const std::string& extension_id);
+                                const ExtensionId& extension_id);
 
   // Responds to the ExtensionHostMsg_WakeEventPage message.
   void SendWakeEventPageResponse(int request_id, bool success);

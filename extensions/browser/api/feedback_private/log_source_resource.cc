@@ -21,7 +21,7 @@ ApiResourceManager<LogSourceResource>::GetFactoryInstance() {
 }
 
 LogSourceResource::LogSourceResource(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     std::unique_ptr<system_logs::SystemLogsSource> source)
     : ApiResource(extension_id), source_(source.release()) {}
 

@@ -237,7 +237,7 @@ class SummingAction : public base::RefCounted<SummingAction> {
         new SummingAction(*increment, min_priority));
   }
 
-  void Apply(const std::string& extension_id,
+  void Apply(const ExtensionId& extension_id,
              const base::Time& install_time,
              int* sum) const {
     *sum += increment_;

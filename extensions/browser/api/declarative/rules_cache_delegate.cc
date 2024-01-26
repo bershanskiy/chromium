@@ -89,7 +89,7 @@ void RulesCacheDelegate::Init(RulesRegistry* registry) {
                                      weak_ptr_factory_.GetWeakPtr()));
 }
 
-void RulesCacheDelegate::UpdateRules(const std::string& extension_id,
+void RulesCacheDelegate::UpdateRules(const ExtensionId& extension_id,
                                      base::Value::List value) {
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
   if (!browser_context_)
@@ -172,7 +172,7 @@ void RulesCacheDelegate::ReadRulesForInstalledExtensions() {
   }
 }
 
-void RulesCacheDelegate::ReadFromStorage(const std::string& extension_id) {
+void RulesCacheDelegate::ReadFromStorage(const ExtensionId& extension_id) {
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
   DCHECK_EQ(Type::kPersistent, type_);
   if (!browser_context_)
@@ -197,7 +197,7 @@ void RulesCacheDelegate::ReadFromStorage(const std::string& extension_id) {
 }
 
 void RulesCacheDelegate::ReadFromStorageCallback(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     std::optional<base::Value> value) {
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
   DCHECK_EQ(Type::kPersistent, type_);
@@ -213,7 +213,7 @@ void RulesCacheDelegate::ReadFromStorageCallback(
 }
 
 bool RulesCacheDelegate::GetDeclarativeRulesStored(
-    const std::string& extension_id) const {
+    const ExtensionId& extension_id) const {
   CHECK(browser_context_);
   DCHECK_EQ(Type::kPersistent, type_);
   const ExtensionPrefs* extension_prefs = ExtensionPrefs::Get(browser_context_);
@@ -229,7 +229,7 @@ bool RulesCacheDelegate::GetDeclarativeRulesStored(
 }
 
 void RulesCacheDelegate::SetDeclarativeRulesStored(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     bool rules_stored) {
   CHECK(browser_context_);
   DCHECK_EQ(Type::kPersistent, type_);

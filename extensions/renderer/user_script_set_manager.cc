@@ -36,7 +36,7 @@ UserScriptSetManager::GetInjectionForDeclarativeScript(
     content::RenderFrame* render_frame,
     int tab_id,
     const GURL& url,
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   UserScriptSet* user_script_set = GetScriptsByHostID(
       mojom::HostID(mojom::HostID::HostType::kExtensions, extension_id));
   if (!user_script_set)
@@ -100,7 +100,7 @@ void UserScriptSetManager::OnUpdateUserScripts(
 }
 
 void UserScriptSetManager::OnExtensionUnloaded(
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   auto it = scripts_.find(
       mojom::HostID(mojom::HostID::HostType::kExtensions, extension_id));
   if (it != scripts_.end()) {

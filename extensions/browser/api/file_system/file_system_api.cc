@@ -244,7 +244,7 @@ base::FilePath GenerateUniqueSavePath(const base::FilePath& path) {
 namespace file_system_api {
 
 base::FilePath GetLastChooseEntryDirectory(const ExtensionPrefs* prefs,
-                                           const std::string& extension_id) {
+                                           const ExtensionId& extension_id) {
   base::FilePath path;
   std::string string_path;
   if (prefs->ReadPrefAsString(extension_id, kLastChooseEntryDirectory,
@@ -255,7 +255,7 @@ base::FilePath GetLastChooseEntryDirectory(const ExtensionPrefs* prefs,
 }
 
 void SetLastChooseEntryDirectory(ExtensionPrefs* prefs,
-                                 const std::string& extension_id,
+                                 const ExtensionId& extension_id,
                                  const base::FilePath& path) {
   prefs->UpdateExtensionPref(extension_id, kLastChooseEntryDirectory,
                              ::base::FilePathToValue(path));

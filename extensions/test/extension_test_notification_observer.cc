@@ -63,7 +63,7 @@ ExtensionTestNotificationObserver::NotificationSet::~NotificationSet() =
     default;
 
 void ExtensionTestNotificationObserver::NotificationSet::
-    OnExtensionFrameUnregistered(const std::string& extension_id,
+    OnExtensionFrameUnregistered(const ExtensionId& extension_id,
                                  content::RenderFrameHost* render_frame_host) {
   closure_list_.Notify();
 }

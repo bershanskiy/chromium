@@ -7,6 +7,7 @@
 
 #include <string>
 
+#include "extensions/common/extension_id.h"
 #include "ui/base/template_expressions.h"
 
 namespace base {
@@ -34,7 +35,7 @@ class ComponentExtensionResourceManager {
   // exist, or nullptr otherwise. If non-null, the returned value must remain
   // valid for the life of this ComponentExtensionResourceManager.
   virtual const ui::TemplateReplacements* GetTemplateReplacementsForExtension(
-      const std::string& extension_id) const = 0;
+      const ExtensionId& extension_id) const = 0;
 };
 
 }  // namespace extensions

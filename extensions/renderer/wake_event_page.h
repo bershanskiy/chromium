@@ -15,6 +15,7 @@
 #include "base/synchronization/lock.h"
 #include "content/public/renderer/render_thread_observer.h"
 #include "extensions/buildflags/buildflags.h"
+#include "extensions/common/extension_id.h"
 #include "ipc/ipc_sync_message_filter.h"
 #include "v8/include/v8-forward.h"
 
@@ -98,7 +99,7 @@ class WakeEventPage
 
   // Sends the ExtensionHostMsg_WakeEvent IPC for |extension_id|, and
   // updates |requests_| bookkeeping.
-  void MakeRequest(const std::string& extension_id,
+  void MakeRequest(const ExtensionId& extension_id,
                    OnResponseCallback on_response);
 
   // content::RenderThreadObserver:

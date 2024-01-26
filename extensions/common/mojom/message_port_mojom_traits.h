@@ -10,6 +10,7 @@
 #include "extensions/common/api/messaging/message.h"
 #include "extensions/common/api/messaging/messaging_endpoint.h"
 #include "extensions/common/api/messaging/port_id.h"
+#include "extensions/common/extension_id.h"
 #include "extensions/common/mojom/message_port.mojom-shared.h"
 #include "mojo/public/cpp/bindings/struct_traits.h"
 
@@ -70,7 +71,7 @@ struct StructTraits<extensions::mojom::MessagingEndpointDataView,
     return endpoint.native_app_name;
   }
 
-  static std::optional<std::string> extension_id(
+  static std::optional<extensions::ExtensionId> extension_id(
       const extensions::MessagingEndpoint& endpoint) {
     return endpoint.extension_id;
   }

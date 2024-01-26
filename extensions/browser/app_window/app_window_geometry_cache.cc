@@ -43,7 +43,7 @@ AppWindowGeometryCache* AppWindowGeometryCache::Get(
   return Factory::GetForContext(context, true /* create */);
 }
 
-void AppWindowGeometryCache::SaveGeometry(const std::string& extension_id,
+void AppWindowGeometryCache::SaveGeometry(const ExtensionId& extension_id,
                                           const std::string& window_id,
                                           const gfx::Rect& bounds,
                                           const gfx::Rect& screen_bounds,
@@ -98,7 +98,7 @@ void AppWindowGeometryCache::SyncToStorage() {
   tosync.swap(unsynced_extensions_);
   for (auto sync_it = tosync.cbegin(), sync_eit = tosync.cend();
        sync_it != sync_eit; ++sync_it) {
-    const std::string& extension_id = *sync_it;
+    const ExtensionId& extension_id = *sync_it;
     const ExtensionData& extension_data = cache_[extension_id];
 
     base::Value::Dict dict;
@@ -131,7 +131,7 @@ void AppWindowGeometryCache::SyncToStorage() {
   }
 }
 
-bool AppWindowGeometryCache::GetGeometry(const std::string& extension_id,
+bool AppWindowGeometryCache::GetGeometry(const ExtensionId& extension_id,
                                          const std::string& window_id,
                                          gfx::Rect* bounds,
                                          gfx::Rect* screen_bounds,
@@ -196,7 +196,7 @@ void AppWindowGeometryCache::SetSyncDelayForTests(int timeout_ms) {
 }
 
 void AppWindowGeometryCache::LoadGeometryFromStorage(
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   ExtensionData& extension_data = cache_[extension_id];
 
   const base::Value::Dict* stored_windows =

@@ -20,14 +20,13 @@ namespace extensions {
 
 AppWebContentsHelper::AppWebContentsHelper(
     content::BrowserContext* browser_context,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     content::WebContents* web_contents,
     AppDelegate* app_delegate)
     : browser_context_(browser_context),
       extension_id_(extension_id),
       web_contents_(web_contents),
-      app_delegate_(app_delegate) {
-}
+      app_delegate_(app_delegate) {}
 
 // static
 bool AppWebContentsHelper::ShouldSuppressGestureEvent(

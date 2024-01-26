@@ -158,7 +158,7 @@ ViscaWebcam::ViscaWebcam() = default;
 
 ViscaWebcam::~ViscaWebcam() = default;
 
-void ViscaWebcam::Open(const std::string& extension_id,
+void ViscaWebcam::Open(const ExtensionId& extension_id,
                        api::SerialPortManager* port_manager,
                        const std::string& path,
                        const OpenCompleteCallback& open_callback) {

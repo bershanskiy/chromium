@@ -31,7 +31,7 @@ std::string GetScriptToLog(const std::string& script) {
 
 base::Value ExecuteScriptInBackgroundPage(
     content::BrowserContext* context,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& script,
     ScriptUserActivation script_user_activation) {
   BackgroundScriptExecutor script_executor(context);
@@ -47,7 +47,7 @@ base::Value ExecuteScriptInBackgroundPage(
 
 bool ExecuteScriptInBackgroundPageNoWait(
     content::BrowserContext* context,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& script,
     ScriptUserActivation script_user_activation) {
   return BackgroundScriptExecutor::ExecuteScriptAsync(
@@ -56,7 +56,7 @@ bool ExecuteScriptInBackgroundPageNoWait(
 
 std::string ExecuteScriptInBackgroundPageDeprecated(
     content::BrowserContext* context,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& script,
     ScriptUserActivation script_user_activation) {
   BackgroundScriptExecutor script_executor(context);
@@ -76,7 +76,7 @@ std::string ExecuteScriptInBackgroundPageDeprecated(
 }
 
 void StopServiceWorkerForExtensionGlobalScope(content::BrowserContext* context,
-                                              const std::string& extension_id) {
+                                              const ExtensionId& extension_id) {
   const Extension* extension =
       ExtensionRegistry::Get(context)->GetExtensionById(
           extension_id, ExtensionRegistry::ENABLED);

@@ -130,7 +130,7 @@ void UpdateDataProvider::GetData(
 }
 
 void UpdateDataProvider::RunInstallCallback(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& public_key,
     const base::FilePath& unpacked_dir,
     bool install_immediately,
@@ -151,7 +151,7 @@ void UpdateDataProvider::RunInstallCallback(
 }
 
 void UpdateDataProvider::InstallUpdateCallback(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& public_key,
     const base::FilePath& unpacked_dir,
     bool install_immediately,

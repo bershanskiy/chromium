@@ -54,7 +54,7 @@ class AppFirewallHoleManagerFactory : public BrowserContextKeyedServiceFactory {
 };
 
 bool HasVisibleAppWindows(BrowserContext* context,
-                          const std::string& extension_id) {
+                          const ExtensionId& extension_id) {
   AppWindowRegistry* registry = AppWindowRegistry::Get(context);
 
   for (const AppWindow* window : registry->GetAppWindowsForApp(extension_id)) {
@@ -78,7 +78,7 @@ AppFirewallHole::AppFirewallHole(
     const base::WeakPtr<AppFirewallHoleManager>& manager,
     chromeos::FirewallHole::PortType type,
     uint16_t port,
-    const std::string& extension_id)
+    const ExtensionId& extension_id)
     : type_(type),
       port_(port),
       extension_id_(extension_id),
@@ -120,7 +120,7 @@ AppFirewallHoleManager* AppFirewallHoleManager::Get(BrowserContext* context) {
 std::unique_ptr<AppFirewallHole> AppFirewallHoleManager::Open(
     chromeos::FirewallHole::PortType type,
     uint16_t port,
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   auto hole = base::WrapUnique(new AppFirewallHole(weak_factory_.GetWeakPtr(),
                                                    type, port, extension_id));
   tracked_holes_.emplace(extension_id, hole.get());

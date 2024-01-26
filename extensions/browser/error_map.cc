@@ -42,24 +42,24 @@ ErrorMap::Filter::~Filter() {
 }
 
 ErrorMap::Filter ErrorMap::Filter::ErrorsForExtension(
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   return Filter(extension_id, -1, std::set<int>(), false);
 }
 
 ErrorMap::Filter ErrorMap::Filter::ErrorsForExtensionWithType(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     ExtensionError::Type type) {
   return Filter(extension_id, type, std::set<int>(), false);
 }
 
 ErrorMap::Filter ErrorMap::Filter::ErrorsForExtensionWithIds(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::set<int>& ids) {
   return Filter(extension_id, -1, ids, false);
 }
 
 ErrorMap::Filter ErrorMap::Filter::ErrorsForExtensionWithTypeAndIds(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     ExtensionError::Type type,
     const std::set<int>& ids) {
   return Filter(extension_id, type, ids, false);
@@ -173,7 +173,7 @@ ErrorMap::~ErrorMap() {
 }
 
 const ErrorList& ErrorMap::GetErrorsForExtension(
-    const std::string& extension_id) const {
+    const ExtensionId& extension_id) const {
   auto iter = map_.find(extension_id);
   return iter != map_.end() ? *iter->second->list() : g_empty_error_list.Get();
 }

@@ -11,6 +11,7 @@
 
 #include "base/functional/bind.h"
 #include "content/public/renderer/v8_value_converter.h"
+#include "extensions/common/extension_id.h"
 #include "extensions/renderer/activity_log_converter_strategy.h"
 #include "extensions/renderer/dispatcher.h"
 #include "extensions/renderer/extensions_renderer_client.h"
@@ -143,7 +144,7 @@ void APIActivityLogger::LogForJS(
     return;
   }
 
-  std::string extension_id = *v8::String::Utf8Value(isolate, args[0]);
+  ExtensionId extension_id = *v8::String::Utf8Value(isolate, args[0]);
   std::string call_name = *v8::String::Utf8Value(isolate, args[1]);
   std::string extra;
   if (args.Length() == 4) {  // Extras are optional.

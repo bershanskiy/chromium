@@ -44,7 +44,7 @@ class MockEventDelegate : public IdleManager::EventDelegate {
 
 class ScopedListen {
  public:
-  ScopedListen(IdleManager* idle_manager, const std::string& extension_id);
+  ScopedListen(IdleManager* idle_manager, const ExtensionId& extension_id);
   ~ScopedListen();
 
  private:
@@ -53,7 +53,7 @@ class ScopedListen {
 };
 
 ScopedListen::ScopedListen(IdleManager* idle_manager,
-                           const std::string& extension_id)
+                           const ExtensionId& extension_id)
     : idle_manager_(idle_manager), extension_id_(extension_id) {
   const EventListenerInfo details(idle::OnStateChanged::kEventName,
                                   extension_id_, GURL(), nullptr);

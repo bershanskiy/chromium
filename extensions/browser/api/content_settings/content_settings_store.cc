@@ -310,7 +310,7 @@ void ContentSettingsStore::ClearContentSettingsForExtensionAndContentType(
 }
 
 base::Value::List ContentSettingsStore::GetSettingsForExtension(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     ChromeSettingScope scope) const {
   base::AutoLock lock(lock_);
   const OriginValueMap* map = GetValueMap(extension_id, scope);
@@ -363,7 +363,7 @@ base::Value::List ContentSettingsStore::GetSettingsForExtension(
              << " extension id: " << extension_id
 
 void ContentSettingsStore::SetExtensionContentSettingFromList(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const base::Value::List& list,
     ChromeSettingScope scope) {
   for (const base::Value& value : list) {
@@ -475,7 +475,7 @@ void ContentSettingsStore::RemoveObserver(Observer* observer) {
 }
 
 void ContentSettingsStore::NotifyOfContentSettingChanged(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     bool incognito) {
   for (auto& observer : observers_)
     observer.OnContentSettingChanged(extension_id, incognito);

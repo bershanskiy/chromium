@@ -131,13 +131,13 @@ class WorkerThreadDispatcher :
 
   // Posts mojom::EventRouter::AddLazyListenerForServiceWorker to the IO thread
   // to call it with GetEventRouterOnIO().
-  void SendAddEventLazyListener(const std::string& extension_id,
+  void SendAddEventLazyListener(const ExtensionId& extension_id,
                                 const GURL& scope,
                                 const std::string& event_name);
 
   // Posts mojom::EventRouter::AddFilteredListenerForServiceWorker to the IO
   // thread to call it with GetEventRouterOnIO().
-  void SendAddEventFilteredListener(const std::string& extension_id,
+  void SendAddEventFilteredListener(const ExtensionId& extension_id,
                                     const GURL& scope,
                                     const std::string& event_name,
                                     int64_t service_worker_version_id,
@@ -156,13 +156,13 @@ class WorkerThreadDispatcher :
 
   // Posts mojom::EventRouter::RemoveLazyListenerForServiceWorker to the IO
   // thread to call it with GetEventRouterOnIO().
-  void SendRemoveEventLazyListener(const std::string& extension_id,
+  void SendRemoveEventLazyListener(const ExtensionId& extension_id,
                                    const GURL& scope,
                                    const std::string& event_name);
 
   // Posts mojom::EventRouter::RemoveFilteredListenerForServiceWorker to the IO
   // thread to call it with GetEventRouterOnIO().
-  void SendRemoveEventFilteredListener(const std::string& extension_id,
+  void SendRemoveEventFilteredListener(const ExtensionId& extension_id,
                                        const GURL& scope,
                                        const std::string& event_name,
                                        int64_t service_worker_version_id,

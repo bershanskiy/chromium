@@ -14,6 +14,7 @@
 
 #include "base/containers/circular_deque.h"
 #include "extensions/browser/extension_error.h"
+#include "extensions/common/extension_id.h"
 
 namespace extensions {
 
@@ -39,14 +40,14 @@ class ErrorMap {
     ~Filter();
 
     // Convenience methods to get a specific type of filter. Prefer these over
-    // the constructor when possible.
-    static Filter ErrorsForExtension(const std::string& extension_id);
-    static Filter ErrorsForExtensionWithType(const std::string& extension_id,
+    // the constructor when possible.const ExtensionId& extension_id
+    static Filter ErrorsForExtension(const ExtensionId& extension_id);
+    static Filter ErrorsForExtensionWithType(const ExtensionId& extension_id,
                                              ExtensionError::Type type);
-    static Filter ErrorsForExtensionWithIds(const std::string& extension_id,
+    static Filter ErrorsForExtensionWithIds(const ExtensionId& extension_id,
                                             const std::set<int>& ids);
     static Filter ErrorsForExtensionWithTypeAndIds(
-        const std::string& extension_id,
+        const ExtensionId& extension_id,
         ExtensionError::Type type,
         const std::set<int>& ids);
     static Filter IncognitoErrors();
@@ -60,7 +61,7 @@ class ErrorMap {
   };
 
   // Return the list of all errors associated with the given extension.
-  const ErrorList& GetErrorsForExtension(const std::string& extension_id) const;
+  const ErrorList& GetErrorsForExtension(const ExtensionId& extension_id) const;
 
   // Add the |error| to the ErrorMap.
   const ExtensionError* AddError(std::unique_ptr<ExtensionError> error);

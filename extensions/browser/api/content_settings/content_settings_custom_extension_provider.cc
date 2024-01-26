@@ -45,7 +45,7 @@ void CustomExtensionProvider::ShutdownOnUIThread() {
 }
 
 void CustomExtensionProvider::OnContentSettingChanged(
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     bool incognito) {
   if (incognito_ != incognito)
     return;

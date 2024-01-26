@@ -120,7 +120,7 @@ class Dispatcher : public content::RenderThreadObserver,
 
   void OnRenderFrameCreated(content::RenderFrame* render_frame);
 
-  bool IsExtensionActive(const std::string& extension_id) const;
+  bool IsExtensionActive(const ExtensionId& extension_id) const;
 
   void DidCreateScriptContext(blink::WebLocalFrame* frame,
                               const v8::Local<v8::Context>& context,
@@ -188,7 +188,7 @@ class Dispatcher : public content::RenderThreadObserver,
 
   // Shared implementation of the various MessageInvoke IPCs.
   void InvokeModuleSystemMethod(content::RenderFrame* render_frame,
-                                const std::string& extension_id,
+                                const ExtensionId& extension_id,
                                 const std::string& module_name,
                                 const std::string& function_name,
                                 const base::Value::List& args);
@@ -238,15 +238,15 @@ class Dispatcher : public content::RenderThreadObserver,
       blink::AssociatedInterfaceRegistry* associated_interfaces) override;
 
   // mojom::Renderer implementation:
-  void ActivateExtension(const std::string& extension_id) override;
+  void ActivateExtension(const ExtensionId& extension_id) override;
   void SetActivityLoggingEnabled(bool enabled) override;
   void LoadExtensions(
       std::vector<mojom::ExtensionLoadedParamsPtr> loaded_extensions) override;
-  void UnloadExtension(const std::string& extension_id) override;
+  void UnloadExtension(const ExtensionId& extension_id) override;
   void SuspendExtension(
-      const std::string& extension_id,
+      const ExtensionId& extension_id,
       mojom::Renderer::SuspendExtensionCallback callback) override;
-  void CancelSuspendExtension(const std::string& extension_id) override;
+  void CancelSuspendExtension(const ExtensionId& extension_id) override;
   void SetDeveloperMode(bool current_developer_mode) override;
   void SetSessionInfo(version_info::Channel channel,
                       mojom::FeatureSessionType session_type,
@@ -259,7 +259,7 @@ class Dispatcher : public content::RenderThreadObserver,
   void UpdateUserScriptWorld(mojom::UserScriptWorldInfoPtr info) override;
   void ShouldSuspend(ShouldSuspendCallback callback) override;
   void TransferBlobs(TransferBlobsCallback callback) override;
-  void UpdatePermissions(const std::string& extension_id,
+  void UpdatePermissions(const ExtensionId& extension_id,
                          PermissionSet active_permissions,
                          PermissionSet withheld_permissions,
                          URLPatternSet policy_blocked_hosts,
@@ -270,7 +270,7 @@ class Dispatcher : public content::RenderThreadObserver,
       URLPatternSet default_policy_allowed_hosts) override;
   void UpdateUserHostRestrictions(URLPatternSet user_blocked_hosts,
                                   URLPatternSet user_allowed_hosts) override;
-  void UpdateTabSpecificPermissions(const std::string& extension_id,
+  void UpdateTabSpecificPermissions(const ExtensionId& extension_id,
                                     URLPatternSet new_hosts,
                                     int tab_id,
                                     bool update_origin_allowlist) override;

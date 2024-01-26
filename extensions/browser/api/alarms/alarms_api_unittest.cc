@@ -39,7 +39,7 @@ namespace {
 class AlarmDelegate : public AlarmManager::Delegate {
  public:
   ~AlarmDelegate() override {}
-  void OnAlarm(const std::string& extension_id, const Alarm& alarm) override {
+  void OnAlarm(const ExtensionId& extension_id, const Alarm& alarm) override {
     alarms_seen.push_back(alarm.js_alarm->name);
     if (!quit_closure_.is_null()) {
       std::move(quit_closure_).Run();

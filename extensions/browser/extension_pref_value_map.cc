@@ -66,7 +66,7 @@ void ExtensionPrefValueMap::RemoveExtensionPref(const std::string& ext_id,
 }
 
 bool ExtensionPrefValueMap::CanExtensionControlPref(
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const std::string& pref_key,
     bool incognito) const {
   auto ext = entries_.find(extension_id);
@@ -105,7 +105,7 @@ void ExtensionPrefValueMap::ClearAllIncognitoSessionOnlyPreferences() {
 }
 
 bool ExtensionPrefValueMap::DoesExtensionControlPref(
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const std::string& pref_key,
     bool* from_incognito) const {
   bool incognito = (from_incognito != nullptr);

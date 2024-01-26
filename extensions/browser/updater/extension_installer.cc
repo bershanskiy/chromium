@@ -24,7 +24,7 @@ using Result = update_client::CrxInstaller::Result;
 }  // namespace
 
 ExtensionInstaller::ExtensionInstaller(
-    std::string extension_id,
+    ExtensionId extension_id,
     const base::FilePath& extension_root,
     bool install_immediately,
     ExtensionInstallerCallback extension_installer_callback)

@@ -226,14 +226,14 @@ class SystemInfoAPITest : public testing::Test {
 
   void AddEventListener(EventRouter* router,
                         EventType type,
-                        const std::string& extension_id = kFakeExtensionId) {
+                        const ExtensionId& extension_id = kFakeExtensionId) {
     router->AddEventListener(EventTypeToName(type), render_process_host(),
                              extension_id);
   }
 
   void RemoveEventListener(EventRouter* router,
                            EventType type,
-                           const std::string& extension_id = kFakeExtensionId) {
+                           const ExtensionId& extension_id = kFakeExtensionId) {
     router->RemoveEventListener(EventTypeToName(type), render_process_host(),
                                 extension_id);
   }

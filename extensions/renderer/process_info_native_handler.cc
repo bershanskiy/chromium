@@ -16,7 +16,7 @@ ProcessInfoNativeHandler::ProcessInfoNativeHandler(ScriptContext* context)
 ProcessInfoNativeHandler::~ProcessInfoNativeHandler() = default;
 
 void ProcessInfoNativeHandler::AddRoutes() {
-  auto get_extension_id = [](const std::string& extension_id,
+  auto get_extension_id = [](const ExtensionId& extension_id,
                              const v8::FunctionCallbackInfo<v8::Value>& args) {
     args.GetReturnValue().Set(gin::StringToV8(args.GetIsolate(), extension_id));
   };

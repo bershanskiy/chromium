@@ -36,7 +36,7 @@ void ExtensionFrameHost::BindLocalFrameHost(
 }
 
 void ExtensionFrameHost::RequestScriptInjectionPermission(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     mojom::InjectionType script_type,
     mojom::RunLocation run_location,
     RequestScriptInjectionPermissionCallback callback) {

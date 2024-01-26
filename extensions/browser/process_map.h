@@ -12,6 +12,7 @@
 
 #include "components/keyed_service/core/keyed_service.h"
 #include "content/public/browser/site_instance.h"
+#include "extensions/common/extension_id.h"
 #include "extensions/common/features/feature.h"
 #include "extensions/common/mojom/context_type.mojom-forward.h"
 
@@ -91,11 +92,11 @@ class ProcessMap : public KeyedService {
 
   size_t size() const { return items_.size(); }
 
-  bool Insert(const std::string& extension_id, int process_id);
+  bool Insert(const ExtensionId& extension_id, int process_id);
 
   int RemoveAllFromProcess(int process_id);
 
-  bool Contains(const std::string& extension_id, int process_id) const;
+  bool Contains(const ExtensionId& extension_id, int process_id) const;
   bool Contains(int process_id) const;
 
   std::set<std::string> GetExtensionsInProcess(int process_id) const;

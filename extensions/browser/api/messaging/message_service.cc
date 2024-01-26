@@ -609,7 +609,7 @@ void MessageService::OpenChannelToTabImpl(
     int tab_id,
     int frame_id,
     const std::string& document_id,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     mojom::ChannelType channel_type,
     const std::string& channel_name,
     mojo::PendingAssociatedRemote<extensions::mojom::MessagePort> port,

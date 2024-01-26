@@ -76,7 +76,7 @@ bool IsWebRequestResourceTypeFrame(
 
 PermissionsData::PageAccess CanExtensionAccessURLInternal(
     extensions::PermissionHelper* permission_helper,
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const GURL& url,
     int tab_id,
     bool crosses_incognito,
@@ -378,7 +378,7 @@ bool WebRequestPermissions::HideRequest(
 // static
 PermissionsData::PageAccess WebRequestPermissions::CanExtensionAccessURL(
     extensions::PermissionHelper* permission_helper,
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const GURL& url,
     int tab_id,
     bool crosses_incognito,

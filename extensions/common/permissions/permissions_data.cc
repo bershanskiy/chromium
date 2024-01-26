@@ -168,7 +168,7 @@ bool PermissionsData::IsRestrictedUrl(const GURL& document_url,
 
 // static
 bool PermissionsData::AllUrlsIncludesChromeUrls(
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   return extension_id == extension_misc::kChromeVoxExtensionId;
 }
 

@@ -16,6 +16,7 @@
 #include "base/command_line.h"
 #include "base/json/json_reader.h"
 #include "base/values.h"
+#include "extensions/common/extension_id.h"
 #include "extensions/common/extensions_client.h"
 #include "extensions/common/install_warning.h"
 #include "extensions/common/manifest.h"
@@ -84,7 +85,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
   FuzzedDataProvider fuzzed_data_provider(data, size);
   PerInputEnvironment per_input_env(fuzzed_data_provider);
 
-  std::string extension_id = fuzzed_data_provider.ConsumeRandomLengthString();
+  ExtensionId extension_id = fuzzed_data_provider.ConsumeRandomLengthString();
   if (extension_id.empty())
     extension_id.resize(1);
 

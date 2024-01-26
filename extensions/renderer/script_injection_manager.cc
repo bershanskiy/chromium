@@ -264,7 +264,7 @@ void ScriptInjectionManager::OnRenderFrameCreated(
 }
 
 void ScriptInjectionManager::OnExtensionUnloaded(
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   for (auto iter = pending_injections_.begin();
       iter != pending_injections_.end();) {
     if ((*iter)->host_id().id == extension_id) {

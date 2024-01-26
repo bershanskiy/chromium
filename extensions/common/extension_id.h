@@ -9,11 +9,14 @@
 #include <string>
 #include <vector>
 
+// #include "base/unguessable_token.h"
+
 namespace extensions {
 
 // If valid, uniquely identifies an Extension using 32 characters from the
 // alphabet 'a'-'p'.
 using ExtensionId = std::string;
+// using ExtensionId = base::UnguessableToken;
 
 using ExtensionIdList = std::vector<ExtensionId>;
 using ExtensionIdSet = std::set<ExtensionId>;

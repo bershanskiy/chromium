@@ -67,7 +67,7 @@ class RendererStartupHelperInterceptor : public RendererStartupHelper,
 
  private:
   // mojom::Renderer implementation:
-  void ActivateExtension(const std::string& extension_id) override {
+  void ActivateExtension(const ExtensionId& extension_id) override {
     activated_extensions_.push_back(extension_id);
   }
   void SetActivityLoggingEnabled(bool enabled) override {}
@@ -91,17 +91,17 @@ class RendererStartupHelperInterceptor : public RendererStartupHelper,
     }
   }
 
-  void UnloadExtension(const std::string& extension_id) override {
+  void UnloadExtension(const ExtensionId& extension_id) override {
     unloaded_extensions_.push_back(extension_id);
   }
 
   void SuspendExtension(
-      const std::string& extension_id,
+      const ExtensionId& extension_id,
       mojom::Renderer::SuspendExtensionCallback callback) override {
     std::move(callback).Run();
   }
 
-  void CancelSuspendExtension(const std::string& extension_id) override {}
+  void CancelSuspendExtension(const ExtensionId& extension_id) override {}
 
   void SetDeveloperMode(bool current_developer_mode) override {}
 
@@ -126,7 +126,7 @@ class RendererStartupHelperInterceptor : public RendererStartupHelper,
     std::move(callback).Run();
   }
 
-  void UpdatePermissions(const std::string& extension_id,
+  void UpdatePermissions(const ExtensionId& extension_id,
                          PermissionSet active_permissions,
                          PermissionSet withheld_permissions,
                          URLPatternSet policy_blocked_hosts,
@@ -143,7 +143,7 @@ class RendererStartupHelperInterceptor : public RendererStartupHelper,
   void UpdateUserHostRestrictions(URLPatternSet user_blocked_hosts,
                                   URLPatternSet user_allowed_hosts) override {}
 
-  void UpdateTabSpecificPermissions(const std::string& extension_id,
+  void UpdateTabSpecificPermissions(const ExtensionId& extension_id,
                                     URLPatternSet new_hosts,
                                     int tab_id,
                                     bool update_origin_allowlist) override {}

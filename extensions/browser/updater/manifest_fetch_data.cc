@@ -264,11 +264,11 @@ ExtensionIdSet ManifestFetchData::GetExtensionIds() const {
   return extension_ids;
 }
 
-bool ManifestFetchData::Includes(const std::string& extension_id) const {
+bool ManifestFetchData::Includes(const ExtensionId& extension_id) const {
   return base::Contains(extensions_data_, extension_id);
 }
 
-bool ManifestFetchData::DidPing(const std::string& extension_id,
+bool ManifestFetchData::DidPing(const ExtensionId& extension_id,
                                 PingType type) const {
   auto i = pings_.find(extension_id);
   if (i == pings_.end())

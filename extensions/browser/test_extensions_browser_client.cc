@@ -140,7 +140,7 @@ bool TestExtensionsBrowserClient::IsGuestSession(
 }
 
 bool TestExtensionsBrowserClient::IsExtensionIncognitoEnabled(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     content::BrowserContext* context) const {
   return false;
 }

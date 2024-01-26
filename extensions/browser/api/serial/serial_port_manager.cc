@@ -92,7 +92,7 @@ void SerialPortManager::OpenPort(
       path, std::move(options), std::move(client), std::move(callback)));
 }
 
-void SerialPortManager::StartConnectionPolling(const std::string& extension_id,
+void SerialPortManager::StartConnectionPolling(const ExtensionId& extension_id,
                                                int connection_id) {
   DCHECK_CALLED_ON_VALID_THREAD(thread_checker_);
   auto* connection = connections_->Get(extension_id, connection_id);

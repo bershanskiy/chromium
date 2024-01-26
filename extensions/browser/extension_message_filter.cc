@@ -102,7 +102,7 @@ bool ExtensionMessageFilter::OnMessageReceived(const IPC::Message& message) {
 
 void ExtensionMessageFilter::OnExtensionWakeEventPage(
     int request_id,
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
   if (!browser_context_)
     return;

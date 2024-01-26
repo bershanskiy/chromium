@@ -82,7 +82,7 @@ void ExtensionsBrowserClient::GetTabAndWindowIdForWebContents(
 }
 
 bool ExtensionsBrowserClient::IsExtensionEnabled(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     content::BrowserContext* context) const {
   return false;
 }
@@ -123,7 +123,7 @@ void ExtensionsBrowserClient::SetLastSaveFilePath(
     const base::FilePath& path) {}
 
 bool ExtensionsBrowserClient::HasIsolatedStorage(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     content::BrowserContext* context) {
   return false;
 }

@@ -28,7 +28,7 @@ ExtensionPrefsHelper::ExtensionPrefsHelper(ExtensionPrefs* prefs,
 ExtensionPrefsHelper::~ExtensionPrefsHelper() = default;
 
 void ExtensionPrefsHelper::SetExtensionControlledPref(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& pref_key,
     ChromeSettingScope scope,
     base::Value value) {
@@ -55,7 +55,7 @@ void ExtensionPrefsHelper::SetExtensionControlledPref(
 }
 
 void ExtensionPrefsHelper::RemoveExtensionControlledPref(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& pref_key,
     ChromeSettingScope scope) {
   DCHECK(prefs_->pref_service()->FindPreference(pref_key))
@@ -74,7 +74,7 @@ void ExtensionPrefsHelper::RemoveExtensionControlledPref(
 }
 
 bool ExtensionPrefsHelper::CanExtensionControlPref(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& pref_key,
     bool incognito) {
   DCHECK(prefs_->pref_service()->FindPreference(pref_key))
@@ -85,7 +85,7 @@ bool ExtensionPrefsHelper::CanExtensionControlPref(
 }
 
 bool ExtensionPrefsHelper::DoesExtensionControlPref(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& pref_key,
     bool* from_incognito) {
   DCHECK(prefs_->pref_service()->FindPreference(pref_key))

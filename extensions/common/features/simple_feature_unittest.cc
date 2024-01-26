@@ -41,7 +41,7 @@ namespace extensions {
 namespace {
 
 struct IsAvailableTestData {
-  std::string extension_id;
+  ExtensionId extension_id;
   Manifest::Type extension_type;
   ManifestLocation location;
   Feature::Platform platform;

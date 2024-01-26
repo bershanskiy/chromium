@@ -526,7 +526,7 @@ void RendererStartupHelper::WakeEventPage(const ExtensionId& extension_id,
 }
 
 void RendererStartupHelper::GetMessageBundle(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     GetMessageBundleCallback callback) {
 #if BUILDFLAG(ENABLE_EXTENSIONS_LEGACY_IPC)
   auto* process =

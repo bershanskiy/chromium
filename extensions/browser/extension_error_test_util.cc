@@ -21,7 +21,7 @@ const char16_t kDefaultStackTrace[] = u"function_name (https://url.com:1:1)";
 }
 
 std::unique_ptr<ExtensionError> CreateNewRuntimeError(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& message,
     bool from_incognito) {
   StackTrace stack_trace;
@@ -44,13 +44,13 @@ std::unique_ptr<ExtensionError> CreateNewRuntimeError(
 }
 
 std::unique_ptr<ExtensionError> CreateNewRuntimeError(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& message) {
   return CreateNewRuntimeError(extension_id, message, false);
 }
 
 std::unique_ptr<ExtensionError> CreateNewManifestError(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& message) {
   return std::unique_ptr<ExtensionError>(
       new ManifestError(extension_id, base::UTF8ToUTF16(message), std::string(),

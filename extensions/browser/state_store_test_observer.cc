@@ -31,7 +31,7 @@ void StateStoreTestObserver::WaitForExtensionAndKey(
 }
 
 void StateStoreTestObserver::WillSetExtensionValue(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const std::string& key) {
   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
 
