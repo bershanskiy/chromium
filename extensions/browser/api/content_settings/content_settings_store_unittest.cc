@@ -55,7 +55,7 @@ class MockContentSettingsStoreObserver
     : public ContentSettingsStore::Observer {
  public:
   MOCK_METHOD2(OnContentSettingChanged,
-               void(const std::string& extension_id, bool incognito));
+               void(const ExtensionId& extension_id, bool incognito));
 };
 
 ContentSetting GetContentSettingFromStore(

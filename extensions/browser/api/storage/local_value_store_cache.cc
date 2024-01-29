@@ -63,7 +63,7 @@ void LocalValueStoreCache::RunWithValueStoreForExtension(
   }
 }
 
-void LocalValueStoreCache::DeleteStorageSoon(const std::string& extension_id) {
+void LocalValueStoreCache::DeleteStorageSoon(const ExtensionId& extension_id) {
   DCHECK(IsOnBackendSequence());
   storage_map_.erase(extension_id);
 

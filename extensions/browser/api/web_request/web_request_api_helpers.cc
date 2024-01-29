@@ -726,8 +726,9 @@ ResponseCookieModification ResponseCookieModification::Clone() const {
   return clone;
 }
 
-EventResponseDelta::EventResponseDelta(const std::string& extension_id,
-                                       const base::Time& extension_install_time)
+EventResponseDelta::EventResponseDelta(
+    const extensions::ExtensionId& extension_id,
+    const base::Time& extension_install_time)
     : extension_id(extension_id),
       extension_install_time(extension_install_time),
       cancel(false) {}
@@ -767,7 +768,7 @@ bool CharListToString(const base::Value::List& list, std::string* out) {
 }
 
 EventResponseDelta CalculateOnBeforeRequestDelta(
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const base::Time& extension_install_time,
     bool cancel,
     const GURL& new_url) {
@@ -779,7 +780,7 @@ EventResponseDelta CalculateOnBeforeRequestDelta(
 
 EventResponseDelta CalculateOnBeforeSendHeadersDelta(
     content::BrowserContext* browser_context,
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const base::Time& extension_install_time,
     bool cancel,
     net::HttpRequestHeaders* old_headers,
@@ -824,7 +825,7 @@ EventResponseDelta CalculateOnBeforeSendHeadersDelta(
 }
 
 EventResponseDelta CalculateOnHeadersReceivedDelta(
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const base::Time& extension_install_time,
     bool cancel,
     const GURL& old_url,
@@ -892,7 +893,7 @@ EventResponseDelta CalculateOnHeadersReceivedDelta(
 }
 
 EventResponseDelta CalculateOnAuthRequiredDelta(
-    const std::string& extension_id,
+    const extensions::ExtensionId& extension_id,
     const base::Time& extension_install_time,
     bool cancel,
     std::optional<net::AuthCredentials> auth_credentials) {

@@ -270,7 +270,7 @@ void DataItem::GetRegisteredValuesForExtension(
     content::BrowserContext* context,
     ValueStoreCache* value_store_cache,
     base::SequencedTaskRunner* task_runner,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     RegisteredValuesCallback callback) {
   scoped_refptr<const Extension> extension =
       ExtensionRegistry::Get(context)->GetExtensionById(
@@ -303,7 +303,7 @@ void DataItem::DeleteAllItemsForExtension(
     content::BrowserContext* context,
     ValueStoreCache* value_store_cache,
     base::SequencedTaskRunner* task_runner,
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     base::OnceClosure callback) {
   task_runner->PostTaskAndReply(
       FROM_HERE,
@@ -313,7 +313,7 @@ void DataItem::DeleteAllItemsForExtension(
 }
 
 DataItem::DataItem(const std::string& id,
-                   const std::string& extension_id,
+                   const ExtensionId& extension_id,
                    content::BrowserContext* context,
                    ValueStoreCache* value_store_cache,
                    base::SequencedTaskRunner* task_runner,

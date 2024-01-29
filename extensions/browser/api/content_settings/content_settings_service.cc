@@ -34,7 +34,7 @@ ContentSettingsService::GetFactoryInstance() {
 }
 
 void ContentSettingsService::OnExtensionRegistered(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const base::Time& install_time,
     bool is_enabled) {
   content_settings_store_->RegisterExtension(
@@ -42,7 +42,7 @@ void ContentSettingsService::OnExtensionRegistered(
 }
 
 void ContentSettingsService::OnExtensionPrefsLoaded(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     const ExtensionPrefs* prefs) {
   const base::Value::List* content_settings =
       prefs->ReadPrefAsList(extension_id, pref_names::kPrefContentSettings);
@@ -60,12 +60,12 @@ void ContentSettingsService::OnExtensionPrefsLoaded(
 }
 
 void ContentSettingsService::OnExtensionPrefsDeleted(
-    const std::string& extension_id) {
+    const ExtensionId& extension_id) {
   content_settings_store_->UnregisterExtension(extension_id);
 }
 
 void ContentSettingsService::OnExtensionStateChanged(
-    const std::string& extension_id,
+    const ExtensionId& extension_id,
     bool state) {
   content_settings_store_->SetExtensionState(extension_id, state);
 }
