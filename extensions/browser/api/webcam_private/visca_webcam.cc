@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <memory>
 
+#include "extensions/common/extension_id.h"
 #include "base/functional/bind.h"
 
 using content::BrowserThread;

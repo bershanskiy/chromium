@@ -36,7 +36,6 @@
 #include "extensions/common/api/automation.h"
 #include "extensions/common/api/automation_internal.h"
 #include "extensions/common/extension_id.h"
-#include "extensions/common/extension_messages.h"
 #include "extensions/common/manifest_handlers/automation.h"
 #include "extensions/common/permissions/permissions_data.h"
 #include "mojo/public/cpp/bindings/associated_remote.h"
