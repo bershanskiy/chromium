@@ -27,6 +27,7 @@
 #include "extensions/browser/extension_system.h"
 #include "extensions/browser/state_store.h"
 #include "extensions/common/api/alarms.h"
+#include "extensions/common/extension_id.h"
 
 namespace extensions {
 

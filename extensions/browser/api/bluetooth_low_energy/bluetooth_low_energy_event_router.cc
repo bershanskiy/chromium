@@ -32,6 +32,7 @@
 #include "extensions/browser/event_router.h"
 #include "extensions/common/api/bluetooth/bluetooth_manifest_data.h"
 #include "extensions/common/extension.h"
+#include "extensions/common/extension_id.h"
 
 using content::BrowserThread;
 

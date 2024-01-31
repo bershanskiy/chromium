@@ -30,6 +30,7 @@
 #include "extensions/browser/extension_host.h"
 #include "extensions/common/api/bluetooth.h"
 #include "extensions/common/api/bluetooth_private.h"
+#include "extensions/common/extension_id.h"
 
 namespace extensions {
 

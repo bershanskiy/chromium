@@ -14,6 +14,7 @@
 #include "extensions/browser/api/bluetooth_socket/bluetooth_api_socket.h"
 #include "extensions/browser/event_router.h"
 #include "extensions/common/api/bluetooth_socket.h"
+#include "extensions/common/extension_id.h"
 #include "net/base/io_buffer.h"
 
 namespace {
