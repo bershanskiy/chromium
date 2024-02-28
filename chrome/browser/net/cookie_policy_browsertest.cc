@@ -75,9 +75,7 @@ class CookiePolicyBrowserTest : public InProcessBrowserTest {
   CookiePolicyBrowserTest()
       : https_server_(net::EmbeddedTestServer::TYPE_HTTPS) {}
 
-  virtual std::vector<base::test::FeatureRef> EnabledFeatures() {
-    return {blink::features::kWebSQLAccess};
-  }
+  virtual std::vector<base::test::FeatureRef> EnabledFeatures() { return {}; }
 
   virtual std::vector<base::test::FeatureRef> DisabledFeatures() { return {}; }
 
@@ -989,8 +987,7 @@ class ThirdPartyCookiePhaseoutPolicyStorageBrowserTest
   net::EmbeddedTestServer* https_server() { return &https_server_; }
 
   std::vector<base::test::FeatureRef> EnabledFeatures() override {
-    return {blink::features::kWebSQLAccess,
-            net::features::kForceThirdPartyCookieBlocking,
+    return {net::features::kForceThirdPartyCookieBlocking,
             net::features::kThirdPartyStoragePartitioning};
   }
 };

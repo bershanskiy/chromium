@@ -1512,17 +1512,6 @@ public class AwSettings {
         return mDomStorageEnabled;
     }
 
-    /** See {@link android.webkit.WebSettings#setDatabaseEnabled}. */
-    public void setDatabaseEnabled(boolean flag) {
-        if (TRACE) Log.i(TAG, "setDatabaseEnabled=" + flag);
-        synchronized (mAwSettingsLock) {
-            if (mDatabaseEnabled != flag) {
-                mDatabaseEnabled = flag;
-                mEventHandler.updateWebkitPreferencesLocked();
-            }
-        }
-    }
-
     /** See {@link android.webkit.WebSettings#getDatabaseEnabled}. */
     public boolean getDatabaseEnabled() {
         synchronized (mAwSettingsLock) {

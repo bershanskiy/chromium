@@ -290,7 +290,6 @@
 #include "components/security_interstitials/content/ssl_error_handler.h"
 #include "components/security_interstitials/content/ssl_error_navigation_throttle.h"
 #include "components/security_state/core/security_state.h"
-#include "components/services/storage/public/cpp/storage_prefs.h"
 #include "components/site_isolation/pref_names.h"
 #include "components/site_isolation/preloaded_isolated_origins.h"
 #include "components/site_isolation/site_isolation_policy.h"
@@ -2627,12 +2626,6 @@ void ChromeContentBrowserClient::AppendExtraCommandLineSwitches(
       if (prefs->GetBoolean(prefs::kPrintPreviewDisabled))
         command_line->AppendSwitch(switches::kDisablePrintPreview);
 
-      // This passes the preference set by an enterprise policy on to a blink
-      // switch so that we know whether to force WebSQL to be enabled.
-      if (prefs->GetBoolean(storage::kWebSQLAccess)) {
-        command_line->AppendSwitch(blink::switches::kWebSQLAccess);
-      }
-
       if (prefs->GetBoolean(prefs::kDataUrlInSvgUseEnabled)) {
         command_line->AppendSwitch(blink::switches::kDataUrlInSvgUseEnabled);
       }
@@ -4245,20 +4238,7 @@ void ChromeContentBrowserClient::OverrideWebkitPrefs(
       prefs->GetBoolean(prefs::kWebXRImmersiveArEnabled);
 #endif
 
-  // Only set `databases_enabled` if disabled. Otherwise check blink::feature
-  // settings for Origin Trial and Chrome flag settings, or prefs setting
-  // for Enterprise Policy.
-  web_prefs->databases_enabled =
-      !web_prefs->databases_enabled
-          ? false
-          : (base::FeatureList::IsEnabled(blink::features::kWebSQLAccess) ||
-             prefs->GetBoolean(storage::kWebSQLAccess));
-
 #if BUILDFLAG(IS_FUCHSIA)
-  // Disable WebSQL support since it is being removed from the web platform
-  // and does not work. See crbug.com/1317431.
-  web_prefs->databases_enabled = false;
-
   // TODO(crbug.com/1311019): Implement WebAuthn integration and remove.
   web_prefs->disable_webauthn = true;
 #endif

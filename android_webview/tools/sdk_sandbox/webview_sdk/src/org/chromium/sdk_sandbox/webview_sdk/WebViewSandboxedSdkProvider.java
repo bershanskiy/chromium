@@ -75,7 +75,6 @@ public class WebViewSandboxedSdkProvider extends SandboxedSdkProvider {
 
         settings.setGeolocationEnabled(true);
         settings.setSupportZoom(true);
-        settings.setDatabaseEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);

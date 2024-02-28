@@ -30,7 +30,6 @@ public abstract class AwParameterizedTest {
                         settings.setAllowFileAccessFromFileURLs(true);
                         settings.setAllowUniversalAccessFromFileURLs(true);
                         settings.setBuiltInZoomControls(true);
-                        settings.setDatabaseEnabled(true);
                         settings.setDisplayZoomControls(false);
                         settings.setDomStorageEnabled(true);
                         settings.setImagesEnabled(false);

@@ -17613,7 +17613,6 @@ from previous Chrome versions.
   <int value="-1460561942" label="SystemEmojiPicker:disabled"/>
   <int value="-1460462432" label="disable-media-source"/>
   <int value="-1459907288" label="DesksTemplates:enabled"/>
-  <int value="-1459246132" label="kWebSQLAccess:disabled"/>
   <int value="-1458229207" label="BorealisEnableUnsupportedHardware:disabled"/>
   <int value="-1457775295" label="PasswordSearchMobile:disabled"/>
   <int value="-1456789591" label="MediaFoundationVideoCapture:enabled"/>
@@ -24090,7 +24089,6 @@ from previous Chrome versions.
   <int value="1467583815" label="AVIF:disabled"/>
   <int value="1469407485" label="disable-accelerated-2d-canvas"/>
   <int value="1470134259" label="NtpTabResumptionModule:disabled"/>
-  <int value="1471169381" label="kWebSQLAccess:enabled"/>
   <int value="1471491886"
       label="AutofillOfferToSaveCardWithSameLastFour:enabled"/>
   <int value="1472042346" label="ClickToCall:enabled"/>

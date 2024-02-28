@@ -35,8 +35,9 @@ std::unique_ptr<DiagnosticsTest> MakeSqliteNssCertDbTest();
 std::unique_ptr<DiagnosticsTest> MakeSqliteNssKeyDbTest();
 #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
 
-std::unique_ptr<DiagnosticsTest> MakeSqliteWebDatabaseTrackerDbTest();
 std::unique_ptr<DiagnosticsTest> MakeSqliteWebDataDbTest();
+
+// TODO: delete WebSQL data here
 
 }  // namespace diagnostics
 

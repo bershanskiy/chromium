@@ -131,11 +131,7 @@ class CookiesTreeModelBrowserTest : public InProcessBrowserTest {
 
   virtual void InitFeatures() {
     feature_list()->InitWithFeatures(
-        // WebSQL is disabled by default as of M119 (crbug/695592).
-        // Enable feature in tests during deprecation trial and enterprise
-        // policy support.
-        {blink::features::kWebSQLAccess},
-        {net::features::kThirdPartyStoragePartitioning});
+        {}, {net::features::kThirdPartyStoragePartitioning});
   }
 
   base::test::ScopedFeatureList* feature_list() { return &feature_list_; }

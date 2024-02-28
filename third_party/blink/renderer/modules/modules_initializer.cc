@@ -92,11 +92,6 @@
 #include "third_party/blink/renderer/modules/storage/storage_namespace.h"
 #include "third_party/blink/renderer/modules/webaudio/audio_graph_tracer.h"
 #include "third_party/blink/renderer/modules/webaudio/inspector_web_audio_agent.h"
-#include "third_party/blink/renderer/modules/webdatabase/database_client.h"
-#include "third_party/blink/renderer/modules/webdatabase/database_manager.h"
-#include "third_party/blink/renderer/modules/webdatabase/inspector_database_agent.h"
-#include "third_party/blink/renderer/modules/webdatabase/web_database_host.h"
-#include "third_party/blink/renderer/modules/webdatabase/web_database_impl.h"
 #include "third_party/blink/renderer/modules/webgl/webgl2_rendering_context.h"
 #include "third_party/blink/renderer/modules/webgl/webgl_rendering_context.h"
 #include "third_party/blink/renderer/modules/webgpu/gpu_canvas_context.h"
@@ -205,7 +200,6 @@ void ModulesInitializer::Initialize() {
   BackgroundColorPaintImageGenerator::Init(
       BackgroundColorPaintImageGeneratorImpl::Create);
   ClipPathPaintImageGenerator::Init(ClipPathPaintImageGeneratorImpl::Create);
-  WebDatabaseHost::GetInstance().Init();
   MediaSourceRegistryImpl::Init();
   if (::features::IsTextBasedAudioDescriptionEnabled())
     SpeechSynthesisBase::Init(SpeechSynthesis::Create);
@@ -295,6 +289,7 @@ ModulesInitializer::CreatePictureInPictureController(Document& document) const {
   return MakeGarbageCollected<PictureInPictureControllerImpl>(document);
 }
 
+// TODO: remove allow_view_agents
 void ModulesInitializer::InitInspectorAgentSession(
     DevToolsSession* session,
     bool allow_view_agents,
@@ -309,9 +304,6 @@ void ModulesInitializer::InitInspectorAgentSession(
                                                         dom_agent);
   session->CreateAndAppend<InspectorWebAudioAgent>(page);
   session->CreateAndAppend<InspectorCacheStorageAgent>(inspected_frames);
-  if (allow_view_agents) {
-    session->CreateAndAppend<InspectorDatabaseAgent>(page);
-  }
 }
 
 void ModulesInitializer::OnClearWindowObjectInMainWorld(
@@ -377,7 +369,6 @@ WebRemotePlaybackClient* ModulesInitializer::CreateWebRemotePlaybackClient(
 void ModulesInitializer::ProvideModulesToPage(
     Page& page,
     const SessionStorageNamespaceId& namespace_id) const {
-  page.ProvideSupplement(MakeGarbageCollected<DatabaseClient>(page));
   StorageNamespace::ProvideSessionStorageNamespaceTo(page, namespace_id);
   AudioGraphTracer::ProvideAudioGraphTracerTo(page);
 #if BUILDFLAG(IS_ANDROID)
@@ -455,10 +446,6 @@ mojom::blink::FileSystemManager& ModulesInitializer::GetFileSystemManager(
 
 void ModulesInitializer::RegisterInterfaces(mojo::BinderMap& binders) {
   DCHECK(Platform::Current());
-  binders.Add<mojom::blink::WebDatabase>(
-      ConvertToBaseRepeatingCallback(
-          CrossThreadBindRepeating(&WebDatabaseImpl::Bind)),
-      Platform::Current()->GetIOTaskRunner());
 }
 
 }  // namespace blink

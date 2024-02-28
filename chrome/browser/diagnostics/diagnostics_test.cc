@@ -46,7 +46,7 @@ const TestNameInfo kTestNameInfo[] = {
     {"SQLiteIntegrityAppCache", "Application cache database"},
     {"SQLiteIntegrityArchivedHistory", "Archived history database (obsolete)"},
     {"SQLiteIntegrityCookie", "Cookie database"},
-    {"SQLiteIntegrityDatabaseTracker", "Database tracker database"},
+    {"SQLiteIntegrityDatabaseTracker", "Database tracker database (obsolete)"},
     {"SQLiteIntegrityHistory", "History database"},
     {"SQLiteIntegrityNSSCert", "NSS certificate database"},
     {"SQLiteIntegrityNSSKey", "NSS Key database"},

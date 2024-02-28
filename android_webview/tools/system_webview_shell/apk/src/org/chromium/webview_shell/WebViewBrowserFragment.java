@@ -551,7 +551,6 @@ public class WebViewBrowserFragment extends Fragment {
         settings.setGeolocationDatabasePath(geolocation.getPath());
 
         settings.setGeolocationEnabled(true);
-        settings.setDatabaseEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);

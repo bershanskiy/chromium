@@ -1790,7 +1790,6 @@ chromium-metrics-reviews@google.com.
   <int value="149" label="WebSettings.setBuiltInZoomControls"/>
   <int value="150" label="WebSettings.setCacheMode"/>
   <int value="151" label="WebSettings.setCursiveFontFamily"/>
-  <int value="152" label="WebSettings.setDatabaseEnabled"/>
   <int value="153" label="WebSettings.setDefaultFixedFontSize"/>
   <int value="154" label="WebSettings.setDefaultFontSize"/>
   <int value="155" label="WebSettings.setDefaultTextEncodingName"/>

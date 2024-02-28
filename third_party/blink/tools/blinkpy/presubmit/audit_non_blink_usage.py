@@ -1666,12 +1666,6 @@ _CONFIG = [
     },
     {
         'paths': [
-            'third_party/blink/renderer/modules/webdatabase/',
-        ],
-        'allowed': ['sql::.+'],
-    },
-    {
-        'paths': [
             'third_party/blink/renderer/core/layout/layout_theme.cc',
             'third_party/blink/renderer/core/layout/layout_theme_mac.mm',
             'third_party/blink/renderer/core/paint/outline_painter.cc',
@@ -1804,15 +1798,6 @@ _CONFIG = [
     },
     {
         'paths': [
-            'third_party/blink/renderer/modules/filesystem/dom_file_system.cc',
-            'third_party/blink/renderer/modules/webdatabase/database_tracker.cc',
-        ],
-        'allowed': [
-            'storage::GetIdentifierFromOrigin',
-        ],
-    },
-    {
-        'paths': [
             'third_party/blink/renderer/core/frame/local_frame.cc',
             'third_party/blink/renderer/core/frame/local_frame.h',
         ],
@@ -1899,14 +1884,6 @@ _CONFIG = [
         ],
         'allowed': [
             'base::flat_map',
-        ]
-    },
-    {
-        'paths': [
-            'third_party/blink/renderer/modules/webdatabase/dom_window_web_database.cc',
-        ],
-        'allowed': [
-            'base::CommandLine',
         ]
     },
     {

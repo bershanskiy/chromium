@@ -99,12 +99,6 @@ class ChromeBrowsingDataLifetimeManagerTest
       public testing::WithParamInterface<FeatureConditions> {
  protected:
   ChromeBrowsingDataLifetimeManagerTest() {
-    std::vector<base::test::FeatureRef> features{
-        // WebSQL is disabled by default as of M119 (crbug/695592).
-        // Enable feature in tests during deprecation trial and enterprise
-        // policy support.
-        blink::features::kWebSQLAccess};
-    InitFeatureLists(std::move(features), {});
   }
 
   ~ChromeBrowsingDataLifetimeManagerTest() override = default;

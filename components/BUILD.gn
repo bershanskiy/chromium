@@ -152,7 +152,6 @@ test("components_unittests") {
       "test/data/value_store/",
       "test/data/webapps/",
       "test/data/webcrypto/",
-      "test/data/web_database/",
       "test/data/web_package/",
       "test/data/webp_transcode/",
       "test/data/web_view/",

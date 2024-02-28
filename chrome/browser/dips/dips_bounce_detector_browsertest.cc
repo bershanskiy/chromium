@@ -414,10 +414,6 @@ class DIPSBounceDetectorBrowserTest
       : prerender_test_helper_(base::BindRepeating(
             &DIPSBounceDetectorBrowserTest::GetActiveWebContents,
             base::Unretained(this))) {
-    // WebSQL is disabled by default as of M119 (crbug/695592). Enable feature
-    // in tests during deprecation trial and enterprise policy support.
-    enabled_features_.push_back({blink::features::kWebSQLAccess, {}});
-
     enabled_features_.push_back(
         {network::features::kSkipTpcdMitigationsForAds,
          {{"SkipTpcdMitigationsForAdsHeuristics", "true"}}});

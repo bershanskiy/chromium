@@ -1581,10 +1581,6 @@ BLINK_COMMON_EXPORT BASE_DECLARE_FEATURE(
     kWebRtcThreadsUseResourceEfficientType);
 BLINK_COMMON_EXPORT BASE_DECLARE_FEATURE(kWebRtcUseMinMaxVEADimensions);
 
-BLINK_COMMON_EXPORT BASE_DECLARE_FEATURE(kWebSQLAccess);
-// If enabled, allows the use of WebSQL in non-secure contexts.
-BLINK_COMMON_EXPORT BASE_DECLARE_FEATURE(kWebSQLNonSecureContextAccess);
-
 BLINK_COMMON_EXPORT BASE_DECLARE_FEATURE(kWebviewAccelerateSmallCanvases);
 
 // When adding new features or constants for features, please keep the features

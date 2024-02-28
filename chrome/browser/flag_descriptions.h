@@ -2236,9 +2236,6 @@ extern const char kResetShortcutCustomizationsDescription[];
 extern const char kSkipServiceWorkerFetchHandlerName[];
 extern const char kSkipServiceWorkerFetchHandlerDescription[];
 
-extern const char kWebSQLAccessName[];
-extern const char kWebSQLAccessDescription[];
-
 extern const char kUseGpuSchedulerDfsName[];
 extern const char kUseGpuSchedulerDfsDescription[];
 

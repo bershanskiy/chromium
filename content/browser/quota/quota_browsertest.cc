@@ -26,9 +26,6 @@ class QuotaBrowserTest : public ContentBrowserTest {
   QuotaBrowserTest() = default;
 
   void SetUp() override {
-    // WebSQL is disabled by default as of M119 (crbug/695592). Enable feature
-    // in tests during deprecation trial and enterprise policy support.
-    base::test::ScopedFeatureList feature_list{blink::features::kWebSQLAccess};
     ContentBrowserTest::SetUp();
   }
 

@@ -168,7 +168,6 @@
 #include "services/network/public/mojom/cookie_manager.mojom.h"
 #include "services/network/public/mojom/network_context.mojom.h"
 #include "services/network/public/mojom/network_service.mojom.h"
-#include "storage/browser/database/database_tracker.h"
 #include "storage/browser/quota/quota_manager.h"
 #include "storage/common/database/database_identifier.h"
 #include "testing/gmock/include/gmock/gmock.h"
@@ -5572,24 +5571,6 @@ class ExtensionCookieCallback {
   bool result_ = false;
 };
 
-namespace {
-// Helper to create (open, close, verify) a WebSQL database.
-// Must be run on the DatabaseTracker's task runner.
-void CreateDatabase(storage::DatabaseTracker* db_tracker,
-                    const std::string& origin_id) {
-  DCHECK(db_tracker->task_runner()->RunsTasksInCurrentSequence());
-  std::u16string db_name = u"db";
-  std::u16string description = u"db_description";
-  int64_t size;
-  db_tracker->DatabaseOpened(origin_id, db_name, description, &size);
-  db_tracker->DatabaseClosed(origin_id, db_name);
-  std::vector<storage::OriginInfo> origins;
-  db_tracker->GetAllOriginsInfo(&origins);
-  EXPECT_EQ(1U, origins.size());
-  EXPECT_EQ(origin_id, origins[0].GetOriginIdentifier());
-}
-}  // namespace
-
 // Verifies extension state is removed upon uninstall.
 TEST_F(ExtensionServiceTest, ClearExtensionData) {
   InitializeEmptyExtensionService();
@@ -5625,14 +5606,6 @@ TEST_F(ExtensionServiceTest, ClearExtensionData) {
                      base::Unretained(&callback)));
   task_environment()->RunUntilIdle();
   EXPECT_EQ(1U, callback.list_.size());
-
-  // Open a database.
-  storage::DatabaseTracker* db_tracker =
-      profile()->GetDefaultStoragePartition()->GetDatabaseTracker();
-  db_tracker->task_runner()->PostTask(
-      FROM_HERE,
-      base::BindOnce(&CreateDatabase, base::Unretained(db_tracker), origin_id));
-  task_environment()->RunUntilIdle();
 
   // Create local storage.
   auto* local_storage_control =
@@ -5692,16 +5665,7 @@ TEST_F(ExtensionServiceTest, ClearExtensionData) {
   task_environment()->RunUntilIdle();
   EXPECT_EQ(0U, callback.list_.size());
 
-  // The database should have vanished as well.
-  db_tracker->task_runner()->PostTask(
-      FROM_HERE, base::BindOnce(
-                     [](storage::DatabaseTracker* db_tracker) {
-                       std::vector<storage::OriginInfo> origins;
-                       db_tracker->GetAllOriginsInfo(&origins);
-                       EXPECT_EQ(0U, origins.size());
-                     },
-                     base::Unretained(db_tracker)));
-  task_environment()->RunUntilIdle();
+  // ? task_environment()->RunUntilIdle();
 
   // Check that the localStorage data been removed.
   {
@@ -5787,14 +5751,6 @@ TEST_F(ExtensionServiceTest, ClearAppData) {
     EXPECT_EQ(1U, future.Get().size());
   }
 
-  // Open a database.
-  storage::DatabaseTracker* db_tracker =
-      profile()->GetDefaultStoragePartition()->GetDatabaseTracker();
-  db_tracker->task_runner()->PostTask(
-      FROM_HERE,
-      base::BindOnce(&CreateDatabase, base::Unretained(db_tracker), origin_id));
-  task_environment()->RunUntilIdle();
-
   // Create local storage.
   auto* local_storage_control =
       profile()->GetDefaultStoragePartition()->GetLocalStorageControl();
@@ -5835,7 +5791,7 @@ TEST_F(ExtensionServiceTest, ClearAppData) {
         }));
     run_loop.Run();
   }
-
+LOG(ERROR) << "PATH " << idb_path;
   // Uninstall one of them, unlimited storage should still be granted
   // to the origin.
   UninstallExtension(id1);
@@ -5870,16 +5826,7 @@ TEST_F(ExtensionServiceTest, ClearAppData) {
     EXPECT_EQ(0U, future.Get().size());
   }
 
-  // The database should have vanished as well.
-  db_tracker->task_runner()->PostTask(
-      FROM_HERE, base::BindOnce(
-                     [](storage::DatabaseTracker* db_tracker) {
-                       std::vector<storage::OriginInfo> origins;
-                       db_tracker->GetAllOriginsInfo(&origins);
-                       EXPECT_EQ(0U, origins.size());
-                     },
-                     base::Unretained(db_tracker)));
-  task_environment()->RunUntilIdle();
+  // ?task_environment()->RunUntilIdle();
 
   // Check that the localStorage data been removed.
   {

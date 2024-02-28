@@ -148,7 +148,6 @@
 #include "services/network/public/mojom/shared_dictionary_access_observer.mojom.h"
 #include "services/network/public/mojom/trust_tokens.mojom.h"
 #include "services/network/public/mojom/url_loader_network_service_observer.mojom.h"
-#include "storage/browser/database/database_tracker.h"
 #include "storage/browser/quota/quota_client_type.h"
 #include "storage/browser/quota/quota_manager.h"
 #include "storage/browser/quota/quota_manager_impl.h"
@@ -1197,15 +1196,6 @@ StoragePartitionImpl::~StoragePartitionImpl() {
     shared_url_loader_factory_for_browser_process_->Shutdown();
   }
 
-  scoped_refptr<storage::DatabaseTracker> database_tracker(
-      GetDatabaseTracker());
-  if (database_tracker) {
-    storage::DatabaseTracker* database_tracker_ptr = database_tracker.get();
-    database_tracker_ptr->task_runner()->PostTask(
-        FROM_HERE, base::BindOnce(&storage::DatabaseTracker::Shutdown,
-                                  std::move(database_tracker)));
-  }
-
   if (GetFileSystemContext()) {
     GetFileSystemContext()->Shutdown();
   }
@@ -1325,10 +1315,6 @@ void StoragePartitionImpl::Initialize(
   // its construction.
   filesystem_context_ = CreateFileSystemContext(
       browser_context_, partition_path_, is_in_memory(), quota_manager_proxy);
-
-  database_tracker_ = storage::DatabaseTracker::Create(
-      partition_path_, is_in_memory(),
-      browser_context_->GetSpecialStoragePolicy(), quota_manager_proxy);
 
   dom_storage_context_ = DOMStorageContextWrapper::Create(
       this, browser_context_->GetSpecialStoragePolicy());
@@ -1679,11 +1665,6 @@ BackgroundSyncContextImpl* StoragePartitionImpl::GetBackgroundSyncContext() {
 storage::FileSystemContext* StoragePartitionImpl::GetFileSystemContext() {
   DCHECK(initialized_);
   return filesystem_context_.get();
-}
-
-storage::DatabaseTracker* StoragePartitionImpl::GetDatabaseTracker() {
-  DCHECK(initialized_);
-  return database_tracker_.get();
 }
 
 DOMStorageContextWrapper* StoragePartitionImpl::GetDOMStorageContext() {

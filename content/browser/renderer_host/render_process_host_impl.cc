@@ -128,7 +128,6 @@
 #include "content/browser/site_instance_impl.h"
 #include "content/browser/theme_helper.h"
 #include "content/browser/tracing/background_tracing_manager_impl.h"
-#include "content/browser/web_database/web_database_host_impl.h"
 #include "content/browser/websockets/websocket_connector_impl.h"
 #include "content/browser/webui/web_ui_controller_factory_registry.h"
 #include "content/common/child_process.mojom.h"
@@ -2358,11 +2357,6 @@ void RenderProcessHostImpl::RegisterMojoInterfaces() {
 
   AddUIThreadInterface(
       registry.get(),
-      base::BindRepeating(&RenderProcessHostImpl::BindWebDatabaseHostImpl,
-                          instance_weak_factory_.GetWeakPtr()));
-
-  AddUIThreadInterface(
-      registry.get(),
       base::BindRepeating(
           [](base::WeakPtr<RenderProcessHostImpl> host,
              mojo::PendingReceiver<
@@ -2553,15 +2547,6 @@ void RenderProcessHostImpl::BindVideoEncoderMetricsProvider(
                                                         std::move(receiver));
 }
 
-void RenderProcessHostImpl::BindWebDatabaseHostImpl(
-    mojo::PendingReceiver<blink::mojom::WebDatabaseHost> receiver) {
-  storage::DatabaseTracker* db_tracker =
-      storage_partition_impl_->GetDatabaseTracker();
-  db_tracker->task_runner()->PostTask(
-      FROM_HERE,
-      base::BindOnce(&WebDatabaseHostImpl::Create, GetID(),
-                     base::WrapRefCounted(db_tracker), std::move(receiver)));
-}
 void RenderProcessHostImpl::BindAecDumpManager(
     mojo::PendingReceiver<blink::mojom::AecDumpManager> receiver) {
   aec_dump_manager_.AddReceiver(std::move(receiver));

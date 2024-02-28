@@ -3,11 +3,6 @@
 # found in the LICENSE file.
 
 static_library("prefs") {
-  sources = [
-    "storage_prefs.cc",
-    "storage_prefs.h",
-  ]
-
   deps = [ "//components/prefs:prefs" ]
 }
 

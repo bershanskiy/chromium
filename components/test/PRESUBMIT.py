@@ -71,9 +71,6 @@ def CheckChange(input_api, output_api):
                 'data/webapps/unit_tests_bundle_data')
         results += presubmit_support.CheckBundleData(
                 input_api, output_api,
-                'data/web_database/unit_tests_bundle_data')
-        results += presubmit_support.CheckBundleData(
-                input_api, output_api,
                 'data/webcrypto/unit_tests_bundle_data')
         results += presubmit_support.CheckBundleData(
                 input_api, output_api,
